@@ -13,15 +13,17 @@ axios(URL)
         const $ = cheerio.load(htmlData)
         const articles = []
 
-        $('div.media__content', htmlData).each((index, element) => {
+        $('div.media.block-link', htmlData).each((index, element) => {
             const title = $(element).find("h3.media__title").text().trim()
-            const titleURL = $(element).find("h3.media__title").find("a.media__link").attr('href')
+            const titleURL = $(element).find("a.media__link").attr('href')
+            const image = $(element).find("div.media__image").find("div.responsive-image img").attr('src')
             //const title = $(element).text()
             // const title = $(element).text()
             // const titleURL = $(element).children('.headline').attr('href')
             articles.push({
                 title,
-                titleURL
+                titleURL,
+                image
             })
         })
         console.log(articles)
