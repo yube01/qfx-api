@@ -5,7 +5,7 @@ import express from "express"
 const PORT = process.env.PORT || 5000
 const app = express()
 
-const URL = 'https://www.manchestereveningnews.co.uk/sport/football/'
+const URL = 'https://www.qfxcinemas.com/home'
 
 axios(URL)
     .then(res => {
@@ -13,12 +13,14 @@ axios(URL)
         const $ = cheerio.load(htmlData)
         const articles = []
 
-        $('.teaser-text', htmlData).each((index, element) => {
-            const title = $(element).children('.headline').text()
-            const titleURL = $(element).children('.headline').attr('href')
+        $('.movie-poster', htmlData).each((index, element) => {
+            const title = $(element).children(".img-responsive").attr('src')
+            //const title = $(element).text()
+            // const title = $(element).text()
+            // const titleURL = $(element).children('.headline').attr('href')
             articles.push({
                 title,
-                titleURL
+                // titleURL
             })
         })
         console.log(articles)
